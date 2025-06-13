@@ -1,0 +1,31 @@
+#include <stdio.h>
+
+struct Student {
+    int roll;
+    char name[50];
+    int chem, maths, phy;
+};
+
+int main() {
+    struct Student s[5];
+    int i, total;
+    float percent;
+
+    for (i = 0; i < 5; i++) {
+        printf("Student %d\nRoll: ", i+1);
+        scanf("%d", &s[i].roll);
+        printf("Name: ");
+        scanf(" %[^\n]", s[i].name);
+        printf("Chem Maths Phy: ");
+        scanf("%d %d %d", &s[i].chem, &s[i].maths, &s[i].phy);
+    }
+
+    for (i = 0; i < 5; i++) {
+        total = s[i].chem + s[i].maths + s[i].phy;
+        percent = total / 3.0;
+        printf("\n%s (%d)\nTotal: %d/300\nPercent: %.2f%%\n",
+               s[i].name, s[i].roll, total, percent);
+    }
+
+    return 0;
+}

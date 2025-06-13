@@ -1,0 +1,42 @@
+#include <stdio.h>
+
+int main() {
+    FILE *evenFile = fopen("even_file.txt", "w");
+    FILE *oddFile = fopen("odd_file.txt", "w");
+
+    if (!evenFile || !oddFile) {
+        printf("Error opening files.\n");
+        return 1;
+    }
+
+    // Write even and odd numbers to respective files
+    for (int i = 50; i <= 70; i++) {
+        if (i % 2 == 0)
+            fprintf(evenFile, "%d, ", i);
+        else
+            fprintf(oddFile, "%d, ", i);
+    }
+
+    fclose(evenFile);
+    fclose(oddFile);
+
+    // Reopen files in read mode
+    evenFile = fopen("even_file.txt", "r");
+    oddFile = fopen("odd_file.txt", "r");
+
+    // Display contents
+    char ch;
+
+    printf("Even numbers from even_file.txt:\n");
+    while ((ch = fgetc(evenFile)) != EOF)
+        putchar(ch);
+
+    printf("\nOdd numbers from odd_file.txt:\n");
+    while ((ch = fgetc(oddFile)) != EOF)
+        putchar(ch);
+
+    fclose(evenFile);
+    fclose(oddFile);
+
+    return 0;
+}
